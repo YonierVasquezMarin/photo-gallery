@@ -14,7 +14,7 @@ import { addIcons } from 'ionicons';
 export class Tab2Page {
 
   constructor() {
-    addIcons({ camera})
+    addIcons({ camera })
   }
 
 }
