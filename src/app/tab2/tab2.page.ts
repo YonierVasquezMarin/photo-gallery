@@ -1,5 +1,5 @@
 import { camera } from 'ionicons/icons'
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonGrid, IonRow, IonCol, IonImg } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { addIcons } from 'ionicons';
@@ -27,10 +27,14 @@ import { NgFor } from '@angular/common';
     NgFor
   ]
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   constructor(public photoService: PhotoService) {
     addIcons({ camera })
+  }
+
+  ngOnInit() {
+    this.photoService.loadSaved();
   }
 
   addPhotoToGallery() {
