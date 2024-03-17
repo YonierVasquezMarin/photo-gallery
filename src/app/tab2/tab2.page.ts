@@ -1,6 +1,6 @@
 import { camera } from 'ionicons/icons'
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonGrid, IonRow, IonCol, IonImg } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonGrid, IonRow, IonCol, IonImg, IonAlert } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { addIcons } from 'ionicons';
 import { PhotoService } from '../services/photo/photo.service';
@@ -24,21 +24,38 @@ import { NgFor } from '@angular/common';
     IonFab,
     IonFabButton,
     IonIcon,
-    NgFor
+    NgFor,
+    IonAlert,
   ]
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page {
+  isAlertOpen = false
+  alertContent = 'content'
 
   constructor(public photoService: PhotoService) {
     addIcons({ camera })
+    this.photoService.loadSaved();
+    setTimeout(async () => {
+      this.showPhotoPaths()
+    }, 2000)
   }
 
-  ngOnInit() {
-    this.photoService.loadSaved();
+  // async ngOnInit() {
+  //   await this.photoService.loadSaved();
+  //   this.showPhotoPaths()
+  // }
+
+  showPhotoPaths() {
+    this.alertContent = this.photoService.getState()
+    this.setOpen(true)
   }
 
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isAlertOpen = isOpen
   }
 
 }

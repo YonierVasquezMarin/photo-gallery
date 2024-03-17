@@ -21,5 +21,13 @@
     </ion-fab-button>
   </ion-fab>
 
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="First image"
+    message={{alertContent}}
+    [buttons]="['Close']"
+    (didDismiss)="setOpen(false)">
+  </ion-alert>
+
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>
